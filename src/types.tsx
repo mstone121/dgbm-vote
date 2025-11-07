@@ -29,7 +29,8 @@ export enum Action {
 	SET_CURRENT_STAGE,
 	SET_VOTERS,
 	SET_CANDIDATES,
-	SET_CANDIDATE_SCORE,
+	SET_RANKED_VOTE_RESULTS,
+	SET_RUNOFF_VOTE_RESULTS,
 }
 
 export type ActionWithPayload =
@@ -37,10 +38,10 @@ export type ActionWithPayload =
 	| { type: Action.SET_VOTERS; payload: Voter[] }
 	| { type: Action.SET_CANDIDATES; payload: Candidate[] }
 	| {
-			type: Action.SET_CANDIDATE_SCORE;
-			payload: {
-				candidateId: string;
-				type: "ranked" | "runoff";
-				score: number;
-			};
+			type: Action.SET_RANKED_VOTE_RESULTS;
+			payload: Record<string, number>;
+	  }
+	| {
+			type: Action.SET_RUNOFF_VOTE_RESULTS;
+			payload: Record<string, number>;
 	  };

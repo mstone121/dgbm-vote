@@ -1,4 +1,4 @@
-import { FC, type ReactNode } from "react";
+import type { ReactNode } from "react";
 
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
@@ -11,26 +11,35 @@ interface StageTemplateProps {
 	children?: ReactNode;
 }
 
-const StageTemplate: FC<StageTemplateProps> = ({
+export default function StageTemplate({
 	title,
 	prevButton,
 	nextButton,
 	children,
-}) => (
-	<Box
-		sx={{ p: 3, bgcolor: "background.paper", borderRadius: 2, boxShadow: 2 }}
-	>
-		<Typography variant="h5" component="h2" gutterBottom>
-			{title}
-		</Typography>
+}: StageTemplateProps) {
+	return (
+		<Box
+			sx={{ p: 3, bgcolor: "background.paper", borderRadius: 2, boxShadow: 2 }}
+		>
+			<Typography
+				variant="h5"
+				component="h2"
+				sx={{ textAlign: "center", mb: 4 }}
+			>
+				{title}
+			</Typography>
 
-		<Box sx={{ mb: 3 }}>{children}</Box>
+			<Box sx={{ mb: 3, mt: 2 }}>{children}</Box>
 
-		<Stack direction="row" justifyContent="flex-start" spacing={2} width="100%">
-			<Box flexGrow={1}>{prevButton}</Box>
-			<Box>{nextButton}</Box>
-		</Stack>
-	</Box>
-);
-
-export default StageTemplate;
+			<Stack
+				direction="row"
+				justifyContent="flex-start"
+				spacing={2}
+				width="100%"
+			>
+				<Box flexGrow={1}>{prevButton}</Box>
+				<Box>{nextButton}</Box>
+			</Stack>
+		</Box>
+	);
+}

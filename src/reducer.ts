@@ -1,4 +1,4 @@
-import { Action, ActionWithPayload, AppState, Candidate } from "./types";
+import { Action, type ActionWithPayload, type AppState } from "./types";
 
 export default function appReducer(
   state: AppState,
@@ -14,41 +14,22 @@ export default function appReducer(
     case Action.SET_CANDIDATES:
       return { ...state, candidates: action.payload };
 
-    case Action.SET_CANDIDATE_SCORE:
+    case Action.SET_RANKED_VOTE_RESULTS:
       return {
         ...state,
-        candidates: updateCandidateById(
-          state.candidates,
-          action.payload.candidateId,
-          (candidate) =>
-            updateCandidateScore(
-              candidate,
-              action.payload.type,
-              action.payload.score
-            )
-        ),
+        candidates: state.candidates.map((candidate) => ({
+          ...candidate,
+          rankedVoteScore: action.payload[candidate.id] ?? 0,
+        })),
+      };
+
+    case Action.SET_RUNOFF_VOTE_RESULTS:
+      return {
+        ...state,
+        candidates: state.candidates.map((candidate) => ({
+          ...candidate,
+          runoffVoteScore: action.payload[candidate.id] ?? 0,
+        })),
       };
   }
 }
-
-const updateCandidateById = (
-  candidates: Candidate[],
-  id: string,
-  update: (candidate: Candidate) => Candidate
-): Candidate[] =>
-  candidates.map((candidate) =>
-    candidate.id === id ? update(candidate) : candidate
-  );
-
-const updateCandidateScore = (
-  candidate: Candidate,
-  type: "ranked" | "runoff",
-  score: number
-): Candidate => {
-  switch (type) {
-    case "ranked":
-      return { ...candidate, rankedVoteScore: score };
-    case "runoff":
-      return { ...candidate, runoffVoteScore: score };
-  }
-};

@@ -3,12 +3,12 @@ import { useState } from "react";
 import { useAppDispatch, useAppState } from "../context";
 
 import StageTemplate from "../components/StageTemplate";
-import NavButton from "../components/NavButton";
+import { NextNavButton, PrevNavButton } from "../components/NavButton";
 import MultiTextInput, {
 	type MultiImportItem,
 } from "../components/MultiTextInput";
 
-import { Action, Candidate, Stage, type Voter } from "../types";
+import { Action, type Candidate, Stage } from "../types";
 
 export default function EnterCandidates() {
 	const dispatch = useAppDispatch();
@@ -29,14 +29,14 @@ export default function EnterCandidates() {
 		<StageTemplate
 			title="Enter Candidates"
 			nextButton={
-				<NavButton
+				<NextNavButton
 					destinationStage={Stage.RANKED_VOTE}
 					label={"Start Ranked Vote"}
 					onClick={saveCandidates}
 				/>
 			}
 			prevButton={
-				<NavButton
+				<PrevNavButton
 					destinationStage={Stage.ENTER_VOTERS}
 					label={"Back"}
 					variant="text"

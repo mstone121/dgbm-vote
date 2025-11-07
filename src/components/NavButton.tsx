@@ -2,7 +2,13 @@ import { Button, ButtonProps } from "@mui/material";
 
 import { useAppDispatch } from "../context";
 
-import { Action, Stage } from "../types";
+import { Action, type Stage } from "../types";
+
+interface NavButtonProps extends ButtonProps {
+	destinationStage: Stage;
+	label: string;
+	onClick?: () => void;
+}
 
 export default function NavButton({
 	destinationStage,
@@ -28,3 +34,11 @@ export default function NavButton({
 		</Button>
 	);
 }
+
+export const NextNavButton = (props: NavButtonProps) => {
+	return <NavButton {...props} variant="contained" />;
+};
+
+export const PrevNavButton = (props: NavButtonProps) => {
+	return <NavButton {...props} variant="text" />;
+};

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useAppDispatch, useAppState } from "../context";
 
 import StageTemplate from "../components/StageTemplate";
-import NavButton from "../components/NavButton";
+import { NextNavButton, PrevNavButton } from "../components/NavButton";
 import MultiTextInput, {
 	type MultiImportItem,
 } from "../components/MultiTextInput";
@@ -29,14 +29,14 @@ export default function EnterVoters() {
 		<StageTemplate
 			title="Enter Voters"
 			nextButton={
-				<NavButton
+				<NextNavButton
 					destinationStage={Stage.ENTER_CANDIDATES}
 					label={"Save and Enter Candidates"}
 					onClick={saveVoters}
 				/>
 			}
 			prevButton={
-				<NavButton
+				<PrevNavButton
 					destinationStage={Stage.ENTER_CANDIDATES}
 					label={"Back"}
 					variant="text"
