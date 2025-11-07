@@ -21,15 +21,13 @@ export default function StageTemplate({
 		<Box
 			sx={{ p: 3, bgcolor: "background.paper", borderRadius: 2, boxShadow: 2 }}
 		>
-			<Typography
-				variant="h5"
-				component="h2"
-				sx={{ textAlign: "center", mb: 4 }}
-			>
+			<Typography variant="h5" component="h2" align="center" mb={4}>
 				{title}
 			</Typography>
 
-			<Box sx={{ mb: 3, mt: 2 }}>{children}</Box>
+			<Box mb={3} mt={2}>
+				{children}
+			</Box>
 
 			<Stack
 				direction="row"

@@ -19,9 +19,9 @@ import {
 import { CSS } from "@dnd-kit/utilities";
 
 import CandidateCard from "./CandidateCard";
+import CandidateList from "./CandidateList";
 
 import type { Candidate } from "../types";
-import CandidateList from "./CandidateList";
 
 export default function RankedVoteInput({
 	ranking,

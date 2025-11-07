@@ -50,7 +50,6 @@ export default function MultiTextInput({
 						<TextField
 							value={item.value}
 							onChange={(e) => handleChange(item.id, e.target.value)}
-							label="Item"
 							variant="outlined"
 							size="small"
 							fullWidth

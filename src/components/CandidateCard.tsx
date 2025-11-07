@@ -4,13 +4,25 @@ import type { Candidate } from "../types";
 
 export default function CandidateCard({
 	candidate,
+	onClick,
 	showRankedScore = false,
+	selected = false,
 }: {
 	candidate: Candidate;
+	onClick?: () => void;
 	showRankedScore?: boolean;
+	selected?: boolean;
 }) {
 	return (
-		<Card sx={{ padding: 2, border: "1px solid #ccc" }}>
+		<Card
+			sx={{
+				padding: 2,
+				border: "1px solid #ccc",
+				cursor: onClick ? "pointer" : "default",
+				backgroundColor: selected ? "rgba(25, 118, 210, 0.1)" : "inherit",
+			}}
+			onClick={onClick}
+		>
 			<Stack direction="row" justifyContent="flex-start">
 				<Box flexGrow={1}>
 					<Typography variant="h6" gutterBottom>

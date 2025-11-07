@@ -1,45 +1,49 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
+
+import { Typography } from "@mui/material";
 
 import { useAppDispatch, useAppState } from "../context";
 
+import useVoterQueue from "../hooks/use-voter-queue";
+import useCandidatesScores from "../hooks/use-candidates-scores";
+
 import StageTemplate from "../components/StageTemplate";
 import { NextNavButton } from "../components/NavButton";
-import RankedVoteScreen from "../components/RankedVoteScreen";
+import VoteScreen from "../components/VoteScreen";
+import RankedVoteInput from "../components/RankedVoteInput";
 
-import { Action, Stage, type Voter } from "../types";
-import { Typography } from "@mui/material";
+import { Action, type Candidate, Stage } from "../types";
 
 export default function RankedVote() {
 	const dispatch = useAppDispatch();
-	const { voters, candidates } = useAppState();
+	const { candidates } = useAppState();
+	const { currentVoter, ...voterQueue } = useVoterQueue();
 
-	const [voterQueue, setVoterQueue] = useState<Voter[]>(voters);
-	const candidateScores = useRef(
-		Object.fromEntries(candidates.map((candidate) => [candidate.id, 0])),
-	);
+	const [ranking, setRanking] = useState<Candidate[]>([...candidates]);
 
-	const onSubmitVote = (rankedCandidates: string[]) => {
-		for (let i = 0; i < rankedCandidates.length; i++) {
-			candidateScores.current[rankedCandidates[i]] += candidates.length - i;
+	const candidatesScores = useCandidatesScores();
+
+	const onSubmitVote = () => {
+		for (let i = 0; i < ranking.length; i++) {
+			candidatesScores.current[ranking[i].id] += candidates.length - i;
 		}
 
-		setVoterQueue(voterQueue.slice(1));
+		voterQueue.advanceVoterQueue();
+		setRanking([...candidates]);
 	};
 
 	const setResults = () => {
 		dispatch({
 			type: Action.SET_RANKED_VOTE_RESULTS,
-			payload: candidateScores.current,
+			payload: candidatesScores.current,
 		});
 	};
-
-	const currentVoter = voterQueue[0];
 
 	return (
 		<StageTemplate
 			title="Ranked Voting"
 			nextButton={
-				voterQueue.length === 0 ? (
+				voterQueue.isEmpty ? (
 					<NextNavButton
 						destinationStage={Stage.RANKED_VOTE_RESULTS}
 						label="See Results"
@@ -49,11 +53,14 @@ export default function RankedVote() {
 			}
 		>
 			{currentVoter ? (
-				<RankedVoteScreen
-					voter={currentVoter}
-					candidates={candidates}
-					onSubmit={onSubmitVote}
-				/>
+				<VoteScreen voter={currentVoter} onSubmit={onSubmitVote}>
+					<Typography variant="h6" mb={2}>
+						{currentVoter.label}, please rank the candidates by dragging and
+						dropping:
+					</Typography>
+
+					<RankedVoteInput ranking={ranking} onRankChange={setRanking} />
+				</VoteScreen>
 			) : (
 				<Typography variant="h6" align="center">
 					All voters have voted!

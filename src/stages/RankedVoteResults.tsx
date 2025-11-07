@@ -26,7 +26,7 @@ export default function RankedVoteResults() {
 				/>
 			}
 		>
-			<Typography variant="h6" sx={{ mb: 3 }}>
+			<Typography variant="h6" mb={3}>
 				Ranked Voting Results
 			</Typography>
 

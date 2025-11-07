@@ -1,14 +1,13 @@
-import { useEffect, useState } from "react";
+import { type ReactNode, useEffect, useState } from "react";
 import { Box, Button, Stack, Typography } from "@mui/material";
 
-import RankedVoteInput from "./RankedVoteInput";
-
-import type { Candidate, Voter } from "../types";
+import type { Voter } from "../types";
 
 interface RankedVoteScreenProps {
 	voter: Voter;
-	candidates: Candidate[];
-	onSubmit: (rankedCandidates: string[]) => void;
+	onSubmit: () => void;
+	children: ReactNode;
+	disabledSubmit?: boolean;
 }
 
 enum VoteStatus {
@@ -17,19 +16,18 @@ enum VoteStatus {
 	DONE,
 }
 
-export default function RankedVoteScreen({
+export default function VoteScreen({
 	voter,
-	candidates,
+	children,
 	onSubmit,
+	disabledSubmit = false,
 }: RankedVoteScreenProps) {
 	const [voteStatus, setVoteStatus] = useState<VoteStatus>(VoteStatus.START);
-	const [ranking, setRanking] = useState<Candidate[]>([...candidates]);
 
-	// biome-ignore lint/correctness/useExhaustiveDependencies: We want to reset when voter changes
+	// biome-ignore lint/correctness/useExhaustiveDependencies: must reset when voter changes
 	useEffect(() => {
-		setRanking([...candidates]);
 		setVoteStatus(VoteStatus.START);
-	}, [voter, candidates]);
+	}, [voter]);
 
 	if (voteStatus === VoteStatus.START) {
 		return (
@@ -55,13 +53,7 @@ export default function RankedVoteScreen({
 					Thank you for voting, {voter.label}!
 				</Typography>
 
-				<Button
-					variant="contained"
-					onClick={() => {
-						onSubmit(ranking.map((candidate) => candidate.id));
-					}}
-					sx={{ mt: 3 }}
-				>
+				<Button variant="contained" onClick={onSubmit} sx={{ mt: 3 }}>
 					Continue
 				</Button>
 			</Box>
@@ -71,11 +63,7 @@ export default function RankedVoteScreen({
 	if (voteStatus === VoteStatus.VOTING) {
 		return (
 			<Stack>
-				<Typography variant="h6" sx={{ mb: 2 }}>
-					{voter.label}, please rank the candidates by dragging and dropping:
-				</Typography>
-
-				<RankedVoteInput ranking={ranking} onRankChange={setRanking} />
+				{children}
 
 				<Button
 					variant="contained"
@@ -84,6 +72,7 @@ export default function RankedVoteScreen({
 						setVoteStatus(VoteStatus.DONE);
 					}}
 					sx={{ mt: 3 }}
+					disabled={disabledSubmit}
 				>
 					Submit Vote
 				</Button>
