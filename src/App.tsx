@@ -1,7 +1,7 @@
 import { ReactNode, useReducer } from "react";
 import { AppBar, Container, CssBaseline } from "@mui/material";
 
-import CurrentStage from "./CurrentStage";
+import CurrentStage from "./components/CurrentStage";
 
 import { AppDispatchContext, AppStateContext } from "./context";
 import appReducer from "./reducer";
