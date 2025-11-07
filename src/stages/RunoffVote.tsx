@@ -53,11 +53,13 @@ export default function RunoffVote() {
 		<StageTemplate
 			title="Runoff Voting"
 			nextButton={
-				<NavButton
-					destinationStage={Stage.RUNOFF_VOTE_RESULTS}
-					label="See Runoff Results"
-					onClick={setResults}
-				/>
+				voterQueue.isEmpty ? (
+					<NavButton
+						destinationStage={Stage.RUNOFF_VOTE_RESULTS}
+						label="See Runoff Results"
+						onClick={setResults}
+					/>
+				) : undefined
 			}
 		>
 			{currentVoter ? (

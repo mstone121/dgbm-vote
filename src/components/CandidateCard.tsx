@@ -5,12 +5,13 @@ import type { Candidate } from "../types";
 export default function CandidateCard({
 	candidate,
 	onClick,
-	showRankedScore = false,
+	showScore = false,
 	selected = false,
 }: {
 	candidate: Candidate;
 	onClick?: () => void;
-	showRankedScore?: boolean;
+	showScore?: "runoff" | "ranked" | false;
+	showRunoffScore?: boolean;
 	selected?: boolean;
 }) {
 	return (
@@ -30,13 +31,17 @@ export default function CandidateCard({
 					</Typography>
 				</Box>
 
-				{showRankedScore ? (
+				{showScore ? (
 					<Typography
 						variant="h6"
 						gutterBottom
 						sx={{ marginLeft: 2, color: "text.secondary" }}
 					>
-						(Score: {candidate.rankedVoteScore})
+						(Score:{" "}
+						{showScore === "runoff"
+							? candidate.runoffVoteScore
+							: candidate.rankedVoteScore}
+						)
 					</Typography>
 				) : null}
 			</Stack>

@@ -27,7 +27,7 @@ export default function RankedVoteResults() {
 			}
 		>
 			<Typography variant="h6" mb={3}>
-				Ranked Voting Results
+				Results
 			</Typography>
 
 			<CandidateList>
@@ -35,7 +35,7 @@ export default function RankedVoteResults() {
 					<CandidateCard
 						key={candidate.id}
 						candidate={candidate}
-						showRankedScore
+						showScore="ranked"
 					/>
 				))}
 			</CandidateList>
