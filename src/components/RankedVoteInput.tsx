@@ -80,6 +80,7 @@ const SortableItem = ({ candidate }: { candidate: Candidate }) => {
 				transform: CSS.Transform.toString(transform),
 				transition,
 				cursor: "move",
+				touchAction: "none",
 			}}
 			{...attributes}
 			{...listeners}
