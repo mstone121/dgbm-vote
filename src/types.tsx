@@ -13,29 +13,33 @@ export enum Stage {
 	RUNOFF_VOTE_RESULTS,
 }
 
-export type Voter = string;
+export type Voter = {
+	id: string;
+	label: string;
+};
 
 export type Candidate = {
-	name: string;
+	id: string;
+	label: string;
 	rankedVoteScore: number;
 	runoffVoteScore: number;
 };
 
 export enum Action {
 	SET_CURRENT_STAGE,
-	ADD_VOTER,
-	ADD_CANDIDATE,
+	SET_VOTERS,
+	SET_CANDIDATES,
 	SET_CANDIDATE_SCORE,
 }
 
 export type ActionWithPayload =
 	| { type: Action.SET_CURRENT_STAGE; payload: Stage }
-	| { type: Action.ADD_VOTER; payload: Voter }
-	| { type: Action.ADD_CANDIDATE; payload: Candidate["name"] }
+	| { type: Action.SET_VOTERS; payload: Voter[] }
+	| { type: Action.SET_CANDIDATES; payload: Candidate[] }
 	| {
 			type: Action.SET_CANDIDATE_SCORE;
 			payload: {
-				candidate: Candidate["name"];
+				candidateId: string;
 				type: "ranked" | "runoff";
 				score: number;
 			};

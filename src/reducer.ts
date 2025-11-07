@@ -8,28 +8,18 @@ export default function appReducer(
     case Action.SET_CURRENT_STAGE:
       return { ...state, currentStage: action.payload };
 
-    case Action.ADD_VOTER:
-      return { ...state, voters: [...state.voters, action.payload] };
+    case Action.SET_VOTERS:
+      return { ...state, voters: action.payload };
 
-    case Action.ADD_CANDIDATE:
-      return {
-        ...state,
-        candidates: [
-          ...state.candidates,
-          {
-            name: action.payload,
-            rankedVoteScore: 0,
-            runoffVoteScore: 0,
-          },
-        ],
-      };
+    case Action.SET_CANDIDATES:
+      return { ...state, candidates: action.payload };
 
     case Action.SET_CANDIDATE_SCORE:
       return {
         ...state,
-        candidates: updateCandidateByName(
+        candidates: updateCandidateById(
           state.candidates,
-          action.payload.candidate,
+          action.payload.candidateId,
           (candidate) =>
             updateCandidateScore(
               candidate,
@@ -41,13 +31,13 @@ export default function appReducer(
   }
 }
 
-const updateCandidateByName = (
+const updateCandidateById = (
   candidates: Candidate[],
-  name: string,
+  id: string,
   update: (candidate: Candidate) => Candidate
 ): Candidate[] =>
   candidates.map((candidate) =>
-    candidate.name === name ? update(candidate) : candidate
+    candidate.id === id ? update(candidate) : candidate
   );
 
 const updateCandidateScore = (
