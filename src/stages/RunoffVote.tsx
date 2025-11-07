@@ -63,7 +63,11 @@ export default function RunoffVote() {
 			}
 		>
 			{currentVoter ? (
-				<VoteScreen voter={currentVoter} onSubmit={onSubmitVote}>
+				<VoteScreen
+					voter={currentVoter}
+					onSubmit={onSubmitVote}
+					disabledSubmit={!selectedCandidate}
+				>
 					<Typography variant="h6" mb={2}>
 						{currentVoter.label}, please select your final candidate:
 					</Typography>
