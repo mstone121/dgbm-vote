@@ -4,10 +4,10 @@ import type { Candidate } from "../types";
 
 export default function CandidateCard({
 	candidate,
-	score,
+	showRankedScore = false,
 }: {
 	candidate: Candidate;
-	score?: number;
+	showRankedScore?: boolean;
 }) {
 	return (
 		<Card sx={{ padding: 2, border: "1px solid #ccc" }}>
@@ -18,13 +18,13 @@ export default function CandidateCard({
 					</Typography>
 				</Box>
 
-				{score !== undefined ? (
+				{showRankedScore ? (
 					<Typography
 						variant="h6"
 						gutterBottom
 						sx={{ marginLeft: 2, color: "text.secondary" }}
 					>
-						(Score: {score})
+						(Score: {candidate.rankedVoteScore})
 					</Typography>
 				) : null}
 			</Stack>

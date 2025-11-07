@@ -1,4 +1,4 @@
-import { ReactNode, useReducer } from "react";
+import { type ReactNode, useReducer } from "react";
 import { AppBar, Container, CssBaseline } from "@mui/material";
 
 import CurrentStage from "./components/CurrentStage";
