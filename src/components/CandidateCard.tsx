@@ -19,7 +19,7 @@ export default function CandidateCard({
 			sx={{
 				padding: 2,
 				border: "1px solid #ccc",
-				cursor: onClick ? "pointer" : "default",
+				cursor: onClick ? "pointer" : undefined,
 				backgroundColor: selected ? "rgba(25, 118, 210, 0.1)" : "inherit",
 			}}
 			onClick={onClick}
