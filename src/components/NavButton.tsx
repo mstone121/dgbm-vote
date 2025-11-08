@@ -29,7 +29,11 @@ export default function NavButton({
 	};
 
 	return (
-		<Button variant={variant} onClick={handleClick}>
+		<Button
+			variant={variant}
+			onClick={handleClick}
+			sx={{ textTransform: "none" }}
+		>
 			{label}
 		</Button>
 	);

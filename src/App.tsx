@@ -1,15 +1,18 @@
 import { type ReactNode, useReducer } from "react";
 import { AppBar, Container, CssBaseline } from "@mui/material";
 
+import Theme from "./Theme";
+
 import CurrentStage from "./components/CurrentStage";
 
 import { AppDispatchContext, AppStateContext } from "./context";
 import appReducer from "./reducer";
+
 import { Stage } from "./types";
 
 function App() {
 	return (
-		<div>
+		<Theme>
 			<CssBaseline />
 			<AppBar
 				position="static"
@@ -22,7 +25,7 @@ function App() {
 					<CurrentStage />
 				</AppContext>
 			</Container>
-		</div>
+		</Theme>
 	);
 }
 
