@@ -33,6 +33,7 @@ export default function EnterVoters() {
 					destinationStage={Stage.ENTER_CANDIDATES}
 					label={"Save and Enter Candidates"}
 					onClick={saveVoters}
+					disabled={voters.filter(removeEmptyVoters).length === 0}
 				/>
 			}
 			prevButton={

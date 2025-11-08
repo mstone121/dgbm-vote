@@ -15,12 +15,8 @@ export default function NavButton({
 	label,
 	onClick,
 	variant = "contained",
-}: {
-	destinationStage: Stage;
-	label: string;
-	onClick?: () => void;
-	variant?: ButtonProps["variant"];
-}) {
+	...props
+}: NavButtonProps) {
 	const dispatch = useAppDispatch();
 
 	const handleClick = () => {
@@ -30,6 +26,7 @@ export default function NavButton({
 
 	return (
 		<Button
+			{...props}
 			variant={variant}
 			onClick={handleClick}
 			sx={{ textTransform: "none" }}

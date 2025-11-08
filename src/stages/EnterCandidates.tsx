@@ -35,6 +35,7 @@ export default function EnterCandidates() {
 					destinationStage={Stage.RANKED_VOTE}
 					label={"Start Ranked Vote"}
 					onClick={saveCandidates}
+					disabled={candidates.filter(removeEmptyCandidates).length === 0}
 				/>
 			}
 			prevButton={
