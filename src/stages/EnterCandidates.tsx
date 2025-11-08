@@ -21,7 +21,9 @@ export default function EnterCandidates() {
 	const saveCandidates = () => {
 		dispatch({
 			type: Action.SET_CANDIDATES,
-			payload: candidates.map(multiImportItemToCandidate),
+			payload: candidates
+				.filter(removeEmptyCandidates)
+				.map(multiImportItemToCandidate),
 		});
 	};
 
@@ -62,3 +64,6 @@ const multiImportItemToCandidate = (item: MultiImportItem): Candidate => ({
 	rankedVoteScore: 0,
 	runoffVoteScore: 0,
 });
+
+const removeEmptyCandidates = (item: MultiImportItem) =>
+	item.value.trim() !== "";

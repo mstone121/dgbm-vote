@@ -21,7 +21,7 @@ export default function EnterVoters() {
 	const saveVoters = () => {
 		dispatch({
 			type: Action.SET_VOTERS,
-			payload: voters.map(multiImportItemToVoter),
+			payload: voters.filter(removeEmptyVoters).map(multiImportItemToVoter),
 		});
 	};
 
@@ -60,3 +60,5 @@ const multiImportItemToVoter = (item: MultiImportItem): Voter => ({
 	id: item.id,
 	label: item.value,
 });
+
+const removeEmptyVoters = (item: MultiImportItem) => item.value.trim() !== "";
