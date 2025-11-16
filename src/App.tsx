@@ -20,7 +20,7 @@ function App() {
 			>
 				DGBM Vote
 			</AppBar>
-			<Container>
+			<Container maxWidth="md" sx={{ marginTop: 4 }}>
 				<AppContext>
 					<CurrentStage />
 				</AppContext>
