@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/dgbm-vote/static/css/main.791eca8e.css",
-    "main.js": "/dgbm-vote/static/js/main.f48d38e4.js",
+    "main.js": "/dgbm-vote/static/js/main.8443ccec.js",
     "static/media/kanit-latin-ext-700-normal.woff2": "/dgbm-vote/static/media/kanit-latin-ext-700-normal.40b4ef7c0abba5a55651.woff2",
     "static/media/kanit-latin-ext-400-normal.woff2": "/dgbm-vote/static/media/kanit-latin-ext-400-normal.292d45fb6b0bc7cd5528.woff2",
     "static/media/kanit-latin-ext-500-normal.woff2": "/dgbm-vote/static/media/kanit-latin-ext-500-normal.d590bbe8c4b360ab50d7.woff2",
@@ -36,10 +36,10 @@
     "static/media/kanit-vietnamese-500-normal.woff": "/dgbm-vote/static/media/kanit-vietnamese-500-normal.60e4022a02f10432e0fd.woff",
     "index.html": "/dgbm-vote/index.html",
     "main.791eca8e.css.map": "/dgbm-vote/static/css/main.791eca8e.css.map",
-    "main.f48d38e4.js.map": "/dgbm-vote/static/js/main.f48d38e4.js.map"
+    "main.8443ccec.js.map": "/dgbm-vote/static/js/main.8443ccec.js.map"
   },
   "entrypoints": [
     "static/css/main.791eca8e.css",
-    "static/js/main.f48d38e4.js"
+    "static/js/main.8443ccec.js"
   ]
 }
